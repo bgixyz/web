@@ -1,20 +1,185 @@
+\# BGI – Blockchain Gemological Institute  
+  
+\> A blockchain-based NFT protocol for diamond grading and certification    
+\> Official Website: \[bgi.xyz\](https://bgi.xyz)  
+  
+BGI (Blockchain Gemological Institute) is the world’s first digital certification authority that combines the \*\*diamond 6C standard\*\* with \*\*non-fungible tokens (NFTs)\*\*. By leveraging blockchain’s immutability and transparency, we generate a unique digital certificate for each diamond, fundamentally solving industry pain points such as certificate forgery, inconsistent grading standards, and missing provenance records.  
+  
+---  
+  
+\#\# Table of Contents  
+  
+- \[Background\](\#background)  
+- \[The 6C Standard: Five Breakthroughs Beyond Traditional 4C\](\#the-6c-standard-five-breakthroughs-beyond-traditional-4c)  
+- \[Technical Architecture\](\#technical-architecture)  
+- \[Core Technical Logic\](\#core-technical-logic)  
+  - \[1. Digital Mapping of Diamond 6C Data\](\#1-digital-mapping-of-diamond-6c-data)  
+  - \[2. NFT Certificate Minting Process\](\#2-nft-certificate-minting-process)  
+  - \[3. Decentralized Storage & Content Addressing\](\#3-decentralized-storage--content-addressing)  
+  - \[4. Smart Contract Verification Mechanism\](\#4-smart-contract-verification-mechanism)  
+- \[Data Flow Diagram\](\#data-flow-diagram)  
+- \[Security & Privacy Design\](\#security--privacy-design)  
+- \[User Guide\](\#user-guide)  
+- \[Roadmap\](\#roadmap)  
+- \[Links\](\#links)  
+  
+---  
+  
+\#\# Background  
+  
+Traditional diamond certificates (e.g., GIA, IGI) suffer from several issues:  
+  
+- \*\*Easily forged\*\* – Paper or PDF certificates can be tampered with or duplicated.  
+- \*\*Inconsistent standards\*\* – Different labs have subjective judgments on color, clarity, etc.  
+- \*\*Opaque provenance\*\* – Certificates and physical diamonds may become disconnected along the supply chain from mine to retailer.  
+- \*\*Asset silos\*\* – A certificate is only a static credential, unable to participate in the digital financial ecosystem.  
+  
+BGI solves these problems by:  
+  
+- Writing key diamond attributes (4C + fluorescence + blockchain fingerprint) into an NFT.  
+- Storing certificate metadata on a decentralized network, ensuring permanent verifiability.  
+- Managing the entire lifecycle of certificates (issuance, transfer, revocation) via smart contracts.  
+- Upgrading diamond certificates into programmable, transferable digital assets.  
+  
+---  
+  
+\#\# The 6C Standard: Five Breakthroughs Beyond Traditional 4C  
+  
+The traditional 4C standard only describes a diamond’s physical attributes (Carat, Color, Clarity, Cut). BGI’s \*\*6C standard\*\* adds \*\*Fluorescence\*\* and \*\*Chain Fingerprint\*\*, creating a complete value loop from physical authenticity to digital trustworthiness.  
+  
+| Dimension | Traditional 4C | BGI 6C | Core Value Upgrade |  
+| :--- | :--- | :--- | :--- |  
+| \*\*Evaluation System\*\* | Carat, Color, Clarity, Cut | 4C + Fluorescence + Chain Fingerprint | Full description of physical properties and digital identity |  
+| \*\*Trust Mechanism\*\* | Relies on lab reputation | Relies on blockchain’s immutable math & consensus | From “institutional endorsement” to “technical trust” |  
+| \*\*Traceability\*\* | Static report, isolated info | Full lifecycle on-chain tracking | End-to-end transparency from mine to fingertips |  
+| \*\*Authenticity Verification\*\* | Certificate separate from diamond, risk of mismatch | Physical features hashed and bound on-chain | From “visual comparison” to “algorithmic verification” |  
+| \*\*Asset Nature\*\* | One‑time purchase credential | Programmable, tradeable digital asset | Unlocks DeFi lending, asset tokenization, etc. |  
+  
+\#\#\# Five Breakthroughs Explained  
+  
+1. \*\*Beyond a single physical grade → multi‑dimensional security\*\*    
+   Traditional 4C is isolated and easy to forge; 6C adds fluorescence and blockchain fingerprint to bind certificate to the physical diamond.  
+  
+2. \*\*Beyond static data → dynamic full‑lifecycle tracking\*\*    
+   Every transfer is recorded on-chain, enabling transparent provenance from mine to retail.  
+  
+3. \*\*Beyond institutional endorsement → tamper‑proof technical trust\*\*    
+   Trust is anchored in math and distributed consensus – no single entity can alter the record.  
+  
+4. \*\*Beyond paper/digital silos → strong physical‑digital binding\*\*    
+   The “Chain Fingerprint” hashes the diamond’s laser inscription or microscopic image on-chain; scanning instantly verifies authenticity.  
+  
+5. \*\*Beyond traditional credentials → long‑term digital asset value\*\*    
+   An NFT certificate is a digital asset independent of the physical object – liquid, programmable, and ready for DeFi and marketplaces.  
+  
+---  
+  
+\#\# Technical Architecture  
+  
+| Layer                | Technology / Method                                                           |  
+| -------------------- | ----------------------------------------------------------------------------- |  
+| \*\*Blockchain\*\*       | Ethereum / Polygon (low gas, high TPS)                                        |  
+| \*\*Token Standard\*\*   | ERC-721 (NFT) + ERC-1155 (batch minting, optional)                           |  
+| \*\*Decentralized Storage\*\* | IPFS + Filecoin (persistence)                                            |  
+| \*\*Content Addressing\*\* | CID (Content Identifier) + cryptographic hash verification                 |  
+| \*\*Oracle\*\*           | Chainlink (for third‑party grading data or physical test results)             |  
+| \*\*Frontend / SDK\*\*   | React + Web3.js, certificate verification portal                              |  
+| \*\*Grading Data Input\*\* | Offline signing tool (HSM) for authorized BGI graders                       |  
+  
+---  
+  
+\#\# Core Technical Logic  
+  
+\#\#\# 1. Digital Mapping of Diamond 6C Data  
+  
+BGI describes 6C data using a standardized JSON Schema, including the grader’s signature:  
+  
+\`\`\`json  
+\{  
+  "version": "1.0",  
+  "diamond\_id": "BGI-210394",  
+  "carat\_weight": 1.24,  
+  "color": "D",  
+  "clarity": "VVS1",  
+  "cut": "Excellent",  
+  "fluorescence": "None",  
+  "chain\_fingerprint": "0x7a3f...c9e2",  
+  "grading\_lab": "BGI Hong Kong",  
+  "grading\_date": "2026-04-01",  
+  "grader\_signature": "0x9d2e..."  
+\}
+    • chain\_fingerprint : A hash of the diamond’s laser inscription and a high‑resolution microscopic image, ensuring a unique binding between the physical diamond and the certificate.
+    • Grader signature : Signed with an HSM to guarantee data origin authenticity.
+2. NFT Certificate Minting Process
+    1. Physical grading – An authorized BGI grader measures the diamond using standard equipment and generates 6C data.
+    2. Data signing – The grader signs the data package with their private key to prove authenticity.
+    3. Upload to IPFS – The signed data package is uploaded to IPFS, obtaining a unique CID (Qm...).
+    4. Mint NFT – Invoke the smart contract’s mintCertificate method with:
+        ◦ Diamond CID
+        ◦ Grader signature
+        ◦ Owner wallet address
+    5. On‑chain record – The smart contract mints an ERC-721 token, binding tokenId to the CID, and records the minting time and grader address.
+3. Decentralized Storage & Content Addressing
+    • Raw data (grading images, spectral data) is stored on IPFS.
+    • Certificate metadata (compliant with ERC-721 Metadata extension) points to the IPFS CID.
+    • Persistence guarantee – Via Filecoin storage deals or pinning services (e.g., Pinata) to prevent data loss.
+    • Integrity verification – Anyone can recompute the hash of a downloaded certificate file using ipfs cid compute. If it matches the CID recorded on-chain, the certificate has not been altered.
+4. Smart Contract Verification Mechanism
+BGI’s smart contract provides the following core functions:
+Function	Description
+verifyCertificate(tokenId)	Returns the certificate CID, grader address, minting time, current owner
+isCertificateValid(tokenId)	Checks whether the certificate is revoked or transferred (only latest owner)
+transferCertificate(to, tokenId)	Transfers ownership (requires signature of current owner)
+revokeCertificate(tokenId)	Only callable by contract admin (BGI multisig) – revokes a fraudulent certificate
 
-**BGI BIT Gemological Institute**
-
-Provides diamond grading similar to AGI and IGI, with the innovative feature of storing the grading results on the blockchain and issuing NFT certificates. This innovation ensures that the certificates are unique and non-replicable.
-
-BGI's diamond certificate includes the 6C standards:
-
-- **Carat Weight**: The weight of the diamond.
-
-- **Color Grade**: The degree of colorlessness of the diamond, graded from D (completely colorless) to Z (light yellow).
-
-- **Clarity Grade**: The purity of the diamond, graded from FL (flawless) to I3 (obvious inclusions).
-
-- **Cut Grade**: Applicable only to round diamonds, combining brightness, fire, and scintillation, graded from Excellent to Poor.
-
-- **Clara Grade**: Brilliance (Clara) grade. Divided into **Clara Grades 1-5, representing: Ultimate, Excellent, Good, Fair, Ordinary Brilliance**.
-
-- **Crypto Encryption**: All BGI certificates use tamper-proof digital encryption technology.
-
-**Also provides gemstone identification, appreciation training, and blockchain digital technology training.**
+On‑chain verification logic example (Solidity) :
+function verifyCertificate(uint256 tokenId)  
+    public view returns (bool, string memory, address)  
+\{  
+    Certificate storage cert = certificates\[tokenId\];  
+    require(cert.exists, "Token does not exist");  
+    require(!cert.revoked, "Certificate revoked");  
+    return (true, cert.cid, cert.originalGrader);  
+\}
+Data Flow Diagram
+\[Physical Diamond\] → \[Grader measures\] → \[6C data + signature\]  
+                                    ↓  
+                              \[Upload to IPFS\]  
+                                    ↓  
+                           \[Obtain CID & metadata URL\]  
+                                    ↓  
+\[User wallet\] ← \[Mint NFT certificate\] ← \[BGI smart contract\]  
+                                    ↓  
+                           \[Visible on public blockchain explorer\]  
+                                    ↓  
+\[Buyer/Retailer\] → \[Enter tokenId\] → \[Frontend shows certificate + verification status\]
+Security & Privacy Design
+    • Grader identity anchoring – Each grader’s public key is bound to an on‑chain DID (Decentralized Identifier) issued by BGI. Every certificate signature is verifiable.
+    • Anti‑substitution via chain fingerprint – chain\_fingerprint is a hash of the diamond’s laser inscription and a microscopic image, ensuring the certificate is strongly bound to the physical diamond.
+    • Privacy protection – Certificates contain no personal information (e.g., owner name); only wallet addresses are recorded. During retail transactions, Zero‑Knowledge Proofs (ZKPs) allow selective disclosure of attributes (e.g., “clarity ≥ VS2”).
+    • Multisig governance – Core contract upgrades, batch revocations, etc., require approval by a 3/5 multisig wallet to prevent single points of failure.
+User Guide
+Verify a Diamond Certificate (no wallet needed)
+    1. Visit bgi.xyz/verify
+    2. Enter the tokenId from the diamond certificate or scan the QR code
+    3. The page will display:
+        ◦ Full 6C data
+        ◦ Grader signature status (valid / invalid)
+        ◦ Current owner’s wallet address (anonymous)
+        ◦ Certificate minting time and number of blockchain confirmations
+Mint a New Certificate (authorized graders only)
+    • Grader logs into internal system → connects hardware wallet → uploads grading data → signature is generated automatically and the smart contract is called.
+Transfer a Certificate (diamond owner)
+    • Go to bgi.xyz/transfer → connect wallet → enter recipient address and tokenId → confirm transaction (pay a small gas fee).
+Roadmap
+    • Q2 2026 – Mainnet launch, support ERC-721 diamond certificate minting.
+    • Q3 2026 – Integrate Chainlink oracle for real‑time exchange rates and on‑chain grading device data.
+    • Q4 2026 – Launch Zero‑Knowledge Proof selective disclosure for high‑end auction house privacy transactions.
+    • Q1 2027 – Cross‑chain interoperability (BNB Chain, Solana) for multi‑chain certificate compatibility.
+Links
+    • Official Website: https://bgi.xyz
+    • Certificate Verification: https://bgi.xyz/verify
+    • Smart Contract (Ethereum): 0xB61... (to be disclosed)
+    • IPFS Certificate Example: ipfs://QmRc.../bgi\_cert\_210394.json
+    • Whitepaper: https://bgi.xyz/whitepaper
+BGI – Giving every diamond an immutable digital genome.
